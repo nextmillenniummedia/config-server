@@ -2,6 +2,7 @@ package main
 
 import (
 	"config-server/app"
+	"config-server/app/commands"
 	"config-server/app/http"
 	"config-server/app/log"
 	"context"
@@ -20,7 +21,10 @@ func main() {
 	do.Provide(injector, log.ProvideConfig)
 	do.Provide(injector, log.ProvideLogger)
 
+	do.Provide(injector, commands.ProvideCommands)
+
 	do.Provide(injector, http.ProvideConfig)
+	do.Provide(injector, http.ProvideRoutes)
 	do.Provide(injector, http.ProvideHttp)
 
 	do.Provide(injector, app.ProvideApp)

@@ -23,18 +23,20 @@ func ProvideHttp(i do.Injector) (inst *Http, err error) {
 	if err != nil {
 		return
 	}
+	routes := do.MustInvoke[*Routes](i)
 	logger := do.MustInvokeAs[loggergo.ILogger](i)
-	inst = NewHttp(config, logger)
+	inst = NewHttp(config, routes, logger)
 	err = inst.Start()
 	return
 }
 
-func NewHttp(config Config, logger loggergo.ILogger) *Http {
+func NewHttp(config Config, Routes *Routes, logger loggergo.ILogger) *Http {
 	host := fmt.Sprintf(":%d", config.Port)
 	cw := NewConnectionWatcher()
 	server := &core_http.Server{
 		Addr:      host,
 		ConnState: cw.OnStateChange,
+		Handler:   Routes.GetRoutes(),
 	}
 	return &Http{
 		config: config,

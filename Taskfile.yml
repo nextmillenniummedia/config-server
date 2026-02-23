@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  init:
+    desc: Init
+    cmd: 
+  dev: 
+    desc: Develop mod
+    cmd: go run main.go 
+  build:
+    desc: Stop all task
+    cmds:
+  stop:
+    desc: Stop all task
+    cmds:
+  down:
+    desc: Stop all tasks with deletion of state
+    cmds:
+  ps:
+    desc: docker ps
+    cmd: docker ps | grep config-server
+
+  infra-up:
+    desc: Infra up
+  infra-stop:
+    desc: Infra stop 
+  infra-down:
+    desc: Infra down 
