@@ -12,6 +12,7 @@ type HttpError struct {
 
 var CommandNotFoundError = errors_std.New("Command not found")
 var BadRequestError = errors_std.New("Bad request")
+var RedisConnectionAddressError = errors_std.New("redis connection address error")
 
 func CommandNotFound(commandName string) error {
 	return fmt.Errorf("%w: %s", CommandNotFoundError, commandName)
